@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Registration Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="message" th:if="${message != null}">
+    [[${message}]]
+</div>
+<form id="registerForm" th:action="@{/register}" method="post" role="form" th:object="${user}">
+    <label for="username">Username:</label><br>
+    <input th:field="*{username}" type="text" id="username" name="username" required><br>
+    <label for="password">Password:</label><br>
+    <input th:field="*{password}" type="password" id="password" name="password" required><br>
+    <label for="email">Email:</label><br>
+    <input th:field="*{email}" type="email" id="email" name="email" required><br>
+    <input type="submit" value="Register" onclick="register(event)">
+</form>
+
+<script>
+    function register(event) {
+    event.preventDefault();
+    var username = $('#username').val();
+    var password = $('#password').val();
+    var email = $('#email').val();
+    $.ajax({
+        url: '/register',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({username: username, password: password, email: email}),
+        success: function(response) {
+            // Redirecționează către /validation
+            window.location.href = '/validation';
+        },
+        error: function() {
+            alert("Numele de utilizator/ Email este deja folosit");
+        }
+    });
+}
+</script>
+</body>
+</html>

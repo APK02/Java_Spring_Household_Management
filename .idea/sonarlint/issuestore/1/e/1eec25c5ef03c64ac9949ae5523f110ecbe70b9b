@@ -1,0 +1,21 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÃÿùÓşÿÿÿÿ
+q	java:S116"URename this field "SECRET_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï…Ó8İÉúëô1
+>
+java:S1170"!Make this final field static too.(ï…Ó8İÉúëô1
+S
+java:S6437"6Revoke and change this password, as it is compromised.(›ÈÚ8éÉúëô1
+O
+java:S1874"2Remove this use of "setSubject"; it is deprecated.(òÃêù8ìÉúëô1
+U
+java:S1874"3Remove this use of "setIssuedAt"; it is deprecated.(Ô£µïûÿÿÿÿ8íÉúëô1
+W
+java:S1874"5Remove this use of "setExpiration"; it is deprecated.(ñÍ‘ùÿÿÿÿ8òÉúëô1
+M
+java:S1874"0Remove this use of "signWith"; it is deprecated.(›ÈÚ8ôÉúëô1
+W
+java:S1874":Remove this use of "SignatureAlgorithm"; it is deprecated.(›ÈÚ8ôÉúëô1
+W
+java:S1874":Remove this use of "SignatureAlgorithm"; it is deprecated.(›ÈÚ8ôÉúëô1
+W
+java:S1874"5Remove this use of "setSigningKey"; it is deprecated.(ªĞµ²øÿÿÿÿ8÷Éúëô1

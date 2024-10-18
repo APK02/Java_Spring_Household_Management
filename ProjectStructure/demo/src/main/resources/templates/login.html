@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="successMessage" style="display: none;">Login successful!</div>
+<div id="errorMessage" style="display: none;">Nume de utilizator sau parolă incorectă</div>
+<h2>Pagina de Login</h2>
+<form id="loginForm" method="post">
+    <label for="username">Nume de utilizator:</label><br>
+    <input type="text" id="username" name="username" required><br>
+    <label for="password">Parolă:</label><br>
+    <input type="password" id="password" name="password" required><br>
+    <button type="button" onclick="login()">Login</button>
+    <button type="button" onclick="getDemo()">Get Demo</button>
+    <button type="button" onclick="logout()">Logout</button>
+</form>
+
+<script>
+    // Funcția de login
+function login() {
+    var username = $('#username').val();
+    var password = $('#password').val();
+    $.ajax({
+        url: '/login',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({username: username, password: password}),
+        success: function(response) {
+            // Stochează tokenul JWT în localStorage
+            localStorage.setItem('jwtToken', response.token);
+            $('#successMessage').show();
+        },
+        error: function() {
+            $('#errorMessage').show();
+        }
+    });
+}
+
+// Funcția pentru a face o cerere către metoda /demo
+function getDemo() {
+    var jwtToken = localStorage.getItem('jwtToken');
+    if (!jwtToken) {
+        alert("Trebuie să te loghezi pentru a accesa metoda demo");
+        return;
+    }
+    $.ajax({
+        url: '/demo',
+        type: 'GET',
+        beforeSend: function(xhr) {
+            // Include tokenul JWT în header-ul Authorization
+            xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+        },
+        success: function(response) {
+            alert("Ai dreptul să accesezi metoda demo");
+        },
+        error: function() {
+            alert("Nu ai dreptul să accesezi metoda demo");
+        }
+    });
+}
+
+// Funcția de logout
+function logout() {
+    var jwtToken = localStorage.getItem('jwtToken');
+    if (!jwtToken) {
+        alert("Trebuie să fii logat pentru a te deconecta");
+        return;
+    }
+    // Șterge tokenul JWT din localStorage
+    localStorage.removeItem('jwtToken');
+    // Afișează mesajul "Logout successful"
+    alert("Logout successful");
+    // Redirecționează către /login după o secundă
+    setTimeout(function() {
+        window.location.href = '/login';
+    }, 1000);
+}
+</script>
+
+</body>
+</html>

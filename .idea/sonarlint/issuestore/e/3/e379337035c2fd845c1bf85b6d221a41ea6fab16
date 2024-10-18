@@ -1,0 +1,19 @@
+
+c
+java:S1192#"HDefine a constant instead of duplicating this literal "message" 4 times.(Æ¸©òûÿÿÿÿ
+f
+java:S11921"KDefine a constant instead of duplicating this literal "validation" 4 times.(œ„˜ÿûÿÿÿÿ
+€
+java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
+\
+java:S2441&":Make "User" serializable or don't store it in the session.(£™Õàûÿÿÿÿ8§ø‰ìô1
+V	java:S125-"<This block of commented-out lines of code should be removed.(‰ü¾üÿÿÿÿ
+E	java:S1060"+Replace this use of System.out by a logger.(É¥ÅÙüÿÿÿÿ
+V	java:S1257"<This block of commented-out lines of code should be removed.(˜ð© þÿÿÿÿ
+V	java:S125V"<This block of commented-out lines of code should be removed.(¨Ò¸ûüÿÿÿÿ

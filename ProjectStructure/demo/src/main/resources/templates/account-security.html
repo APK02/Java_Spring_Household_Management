@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Security</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Actualizează-ți contul:</h1>
+<form id="updateForm" method="post">
+    <label for="username">Nume de utilizator:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="newPassword">Parolă nouă:</label><br>
+    <input type="password" id="newPassword" name="newPassword"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <label for="oldPassword">Parolă curentă necesară pentru modificări:</label><br>
+    <input type="password" id="oldPassword" name="oldPassword"><br>
+    <input type="submit" value="Submit" onclick="updateUser(event)">
+</form>
+
+<script>
+    function updateUser(event) {
+        event.preventDefault();
+        var jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            alert("Trebuie să te loghezi pentru a actualiza contul");
+            return;
+        }
+        var username = $('#username').val();
+        var password = $('#newPassword').val();
+        var email = $('#email').val();
+        var oldPassword = $('#oldPassword').val();
+
+        var updateUserRequest = {
+            user: {
+                username: username,
+                password: password,
+                email: email
+            },
+            oldPassword: oldPassword
+        };
+        console.log(updateUserRequest);
+        $.ajax({
+            url: '/account-security',
+            type: 'POST',
+            contentType: 'application/json',
+            beforeSend: function(xhr) {
+                // Include tokenul JWT în header-ul Authorization
+                xhr.setRequestHeader('Authorization', 'Bearer ' + jwtToken);
+            },
+            data: JSON.stringify(updateUserRequest), // Trimiteți obiectul ca JSON
+            success: function(response) {
+                // Afișează mesajul de succes
+                 alert("Contul a fost actualizat prin campurile completate");
+                 localStorage.removeItem('jwtToken');
+                // Afișează mesajul "Logout successful"
+                alert("Logout successful");
+                // Redirecționează către /login după o secundă
+                setTimeout(function() {
+                          window.location.href = '/login';
+                }, 1000);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Afișează un mesaj de eroare
+                alert("Eroare la actualizare: " + jqXHR.responseText);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

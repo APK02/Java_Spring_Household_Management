@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="message" th:if="${message != null}">
+    [[${message}]]
+</div>
+
+<h1>Introduce the code sent in the email:</h1>
+<form id="validationForm" th:action="@{/validation}" method="post" role="form" th:object="${code}">
+    <label for="code">Enter your 6-digit code:</label><br>
+    <input type="text" id="code" name="code" pattern="\d{6}" required><br>
+    <input type="submit" value="Submit" onclick="validateCode(event)">
+</form>
+<h4>Check the spam also, if you did not receive the code the email must be incorrect</h4>
+</body>
+
+<script>
+    function validateCode(event) {
+    event.preventDefault();
+    var code = $('#code').val();
+    $.ajax({
+        url: '/validation',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ code: code }),
+        success: function(response) {
+            // Afișează mesajul de succes
+            alert(response);
+            // Redirecționează către /login după o secundă
+            setTimeout(function() {
+                window.location.href = '/login';
+            }, 1000);
+        },
+        error: function(jqXHR) {
+            // Afișează un mesaj de eroare
+            alert(jqXHR.responseText);
+        }
+    });
+}
+</script>
+</html>

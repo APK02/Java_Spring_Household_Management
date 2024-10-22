@@ -20,6 +20,12 @@
             <meta content="Bejan" property="schema:familyName">
             <span property="schema:name">Bejan Paul Eusebiu</span>
         </span></li>
+         <li><span typeof="schema:Person">
+            <meta content="Bruno" property="schema:givenName">
+            <meta content="Cristian" property="schema:additionalName">
+            <meta content="Balcan" property="schema:familyName">
+            <span property="schema:name">Verestiuc Eduard Gabriel</span>
+        </span></li>
     </ul>
     <h2>Project Description</h2>
     <p>
